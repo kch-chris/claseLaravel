@@ -17,6 +17,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/HolaMundo',function (){
+    return view('holamundo');;
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::middleware(['auth'])->group(function () {
+    
+    //**********Rutas para productos
+    Route::get('/products', 'Catalogs\ProductsController@index');
+
+    
+});
+
