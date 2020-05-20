@@ -17,7 +17,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+     <!-- Custom CSS -->
+     <link href="{{ asset('assets/adminmart/css/style.min.css') }} " rel="stylesheet">
 
     @yield('css')
 </head>
