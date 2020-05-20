@@ -30,6 +30,9 @@ Route::middleware(['auth'])->group(function () {
     
     //**********Rutas para productos
     Route::get('/products', 'Catalogs\ProductsController@index');
+    Route::get('/products/add', 'Catalogs\ProductsController@add');
+    Route::get('/products/edit', 'Catalogs\ProductsController@edit');
+    Route::delete('/products/delete', 'Catalogs\ProductsController@delete');
 
     
 });
