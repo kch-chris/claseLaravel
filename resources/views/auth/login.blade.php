@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.public')
 
 @section('content')
-{{-- <div class="container">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 <!-- ============================================================== -->
         <!-- Login box.scss -->
         <!-- ============================================================== -->
@@ -85,24 +85,44 @@
                         </div>
                         <h2 class="mt-3 text-center">Sign In</h2>
                         <p class="text-center">Enter your email address and password to access admin panel.</p>
-                        <form class="mt-4">
+                        <form class="mt-4" action="{{ route('login') }}">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label class="text-dark" for="uname">Username</label>
-                                        <input class="form-control" id="uname" type="text"
-                                            placeholder="enter your username">
+                                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label class="text-dark" for="pwd">Password</label>
-                                        <input class="form-control" id="pwd" type="password"
-                                            placeholder="enter your password">
+                                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-12 text-center">
-                                    <button type="submit" class="btn btn-block btn-dark">Sign In</button>
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Login') }}
+                                    </button>
+    
+                                    @if (Route::has('password.request'))
+                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                            {{ __('Forgot Your Password?') }}
+                                        </a>
+                                    @endif
                                 </div>
                                 <div class="col-lg-12 text-center mt-5">
                                     Don't have an account? <a href="#" class="text-danger">Sign Up</a>

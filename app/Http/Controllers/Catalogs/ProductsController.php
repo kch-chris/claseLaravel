@@ -10,7 +10,14 @@ class ProductsController extends Controller
 {
     public function index(){
 
-        return view('catalogs.products.index');
+        $products = Products::where('price','>',30)->get();
+        
+        return view('catalogs.products.index')->with('products',$products);
 
+    }
+
+    public function add()
+    {
+        return view('catalogs.products.add');
     }
 }
