@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Catalogs;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductsRequest;
 use App\Models\Products;
 
 class ProductsController extends Controller
@@ -21,10 +22,8 @@ class ProductsController extends Controller
         return view('catalogs.products.create');
     }
 
-    public function store(Request $request)
+    public function store(ProductsRequest $request)
     {
-        
-
         $newProduct = new Products();
 
         $newProduct->description=$request->post('description');
@@ -34,8 +33,7 @@ class ProductsController extends Controller
 
         $newProduct->save();
 
-        $this->index();
-
+        return redirect()->route('products.index');
         
     }
 
@@ -48,7 +46,7 @@ class ProductsController extends Controller
 
     }
 
-    public function update($productID,Request $request)
+    public function update($productID,ProductsRequest $request)
     {
         
         $product = Products::where('productsID', '=', $productID)->firstOrFail();  
