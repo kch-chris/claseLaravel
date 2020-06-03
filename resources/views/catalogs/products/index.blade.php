@@ -8,7 +8,7 @@
     <div>
         <h2>Products</h2>
         <div class="float-right">
-        <a href="/products/add" class="btn btn-circle btn-primary"><i class="fas fa-plus"></i></a>
+        <a href="{{ route('products.create') }}" class="btn btn-circle btn-primary"><i class="fas fa-plus"></i></a>
         </div>
     </div>
 
@@ -32,8 +32,12 @@
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->cost }}</td>
                         <td>
-                            <button class="btn btn-circle btn-success"><i class="fas fa-pencil-alt"></i></button>
-                            <button class="btn btn-circle btn-danger"><i class="fas fa-trash"></i></button>
+                            <a href="{{ "products/".$product->productsID."/edit" }}" class="btn btn-circle btn-success"><i class="fas fa-pencil-alt"></i></a>
+                            <form action="{{ "products/".$product->productsID }}" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                @csrf
+                                <button type="submit" class="btn btn-circle btn-danger"><i class="fas fa-trash"></i></button>
+                            </form>
                         </td>
                     </tr>        
                     @empty
