@@ -7,9 +7,11 @@
 <div class="panel">
     <div>
         <h2>Products</h2>
+        @can('create products')
         <div class="float-right">
         <a href="{{ route('products.create') }}" class="btn btn-circle btn-primary"><i class="fas fa-plus"></i></a>
         </div>
+        @endcan
     </div>
 
     <div class="col-8">
@@ -32,12 +34,16 @@
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->cost }}</td>
                         <td>
+                        @can('edit products')
                         <a href="{{ "products/".$product->productsID."/edit" }}" class="btn btn-circle btn-success"><i class="fas fa-pencil-alt"></i></a>
+                        @endcan
+                        @can('delete products')
                         <form action="{{ "products/".$product->productsID }}" method="post">   
                             <input type="hidden" name="_method" value="DELETE">
                             @csrf
                             <button type="submit" class="btn btn-circle btn-danger"><i class="fas fa-trash"></i></button>
                         </form>
+                        @endcan
                         </td>
                     </tr>        
                     @empty
