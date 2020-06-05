@@ -8,7 +8,9 @@
     <div>
         <h2>Clients</h2>
         <div class="float-right">
+        @can('create clients')
         <a href="{{ route('clients.create') }}" class="btn btn-circle btn-primary"><i class="fas fa-plus"></i></a>
+        @endcan
         </div>
     </div>
 
@@ -38,12 +40,16 @@
                         <td>{{ $client->sex }}</td>
                         <td>{{ $client->credit }}</td>
                         <td>
+                            @can('edit clients')
                             <a href="{{ "clients/".$client->clientsID."/edit" }}" class="btn btn-circle btn-success"><i class="fas fa-pencil-alt"></i></a>
+                            @endcan
+                            @can('delete clients')
                             <form action="{{ "clients/".$client->clientsID }}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf
                                 <button type="submit" class="btn btn-circle btn-danger"><i class="fas fa-trash"></i></button>
                             </form>
+                            @endcan
                         </td>
                     </tr>        
                     @empty

@@ -278,7 +278,7 @@
                                     class="hide-menu">Dashboard</span></a></li>
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Catalogos</span></li>
-                        {{-- @can('see clients') --}}
+                        @can('see clients')
                         <li class="sidebar-item"> 
                             <a class="sidebar-link" href="{{ url('/clients') }}"
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
@@ -286,7 +286,7 @@
                                 </span>
                             </a>
                         </li>
-                        {{-- @endcan --}}
+                        @endcan
                         @can('see products')
                         <li class="sidebar-item"> 
                             <a class="sidebar-link sidebar-link" href="{{ route('products.index') }}"

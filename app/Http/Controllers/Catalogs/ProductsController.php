@@ -6,9 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductsRequest;
 use App\Models\Products;
+use App\User;
 
 class ProductsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:see products|edit products']);
+    }
+
     public function index(){
 
         $products = Products::where('price','>', 30)->get();;
