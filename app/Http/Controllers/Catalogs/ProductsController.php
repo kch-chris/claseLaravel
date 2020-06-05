@@ -53,6 +53,8 @@ class ProductsController extends Controller
         $product->description = $request->post('description');
         $product->price = $request->post('price');
         $product->cost = $request->post('cost');
+        
+        $product = Products::where('productsID', '=', $product)->firstOrFail();  
 
         $product->save();
 

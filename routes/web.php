@@ -37,11 +37,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resources([
         'products' => 'Catalogs\ProductsController'
     ]);
-
+    
     Route::resources([
         'clients' => 'Catalogs\ClientsController'
     ]);
-
     
 });
 
