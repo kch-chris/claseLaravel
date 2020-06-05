@@ -34,6 +34,7 @@
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->cost }}</td>
                         <td>
+
                         @can('edit products')
                         <a href="{{ "products/".$product->productsID."/edit" }}" class="btn btn-circle btn-success"><i class="fas fa-pencil-alt"></i></a>
                         @endcan

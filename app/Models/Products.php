@@ -7,12 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Products extends Model
 {
     protected $table="products";
-
     protected $primaryKey = 'productsID';
 
     protected $fillable = [
         'name' , 'description', 'price', 'cost'
-    ];
-
-    
+    ];    
 }
