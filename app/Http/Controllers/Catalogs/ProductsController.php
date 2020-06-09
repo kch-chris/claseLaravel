@@ -6,9 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductsRequest;
 use App\Models\Products;
+use App\User;
 
 class ProductsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:see products|edit products']);
+    }
+
     public function index(){
 
         $products = Products::where('price','>', 30)->get();;
@@ -26,42 +32,40 @@ class ProductsController extends Controller
     {
         $newProduct = new Products();
 
-        $newProduct->description=$request->post('description');
-        $newProduct->name=$request->post('name');
-        $newProduct->price=$request->post('price');
-        $newProduct->cost=$request->post('cost');
+        $newProduct->name = $request->post('name');
+        $newProduct->description = $request->post('description');
+        $newProduct->price = $request->post('price');
+        $newProduct->cost = $request->post('cost');
 
         $newProduct->save();
 
         return redirect()->route('products.index');
-        
+
     }
 
     public function edit($product)
     {
-        $product = Products::where('productsID', '=', $product)->firstOrFail();  
-        
+        $product = Products::where('productsID', '=' , $product)->firstOrFail();
+        // dd($product);
         return view('catalogs.products.edit')->with('product',$product);
-
-
     }
 
     public function update($productID,ProductsRequest $request)
     {
+        $product = Products::where('productsID', '=' , $productID)->firstOrFail();
+
+        $product->name = $request->post('name');
+        $product->description = $request->post('description');
+        $product->price = $request->post('price');
+        $product->cost = $request->post('cost');
         
-        $product = Products::where('productsID', '=', $productID)->firstOrFail();  
-        
-        $product->description=$request->post('description');
-        $product->name=$request->post('name');
-        $product->price=$request->post('price');
-        $product->cost=$request->post('cost');
+        $product = Products::where('productsID', '=', $product)->firstOrFail();  
 
         $product->save();
 
         return redirect()->route('products.index');
 
     }
-
 
     public function destroy($productID)
     {
