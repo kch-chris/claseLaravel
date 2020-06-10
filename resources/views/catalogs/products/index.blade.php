@@ -32,21 +32,12 @@
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->cost }}</td>
                         <td>
-<<<<<<< HEAD
-                            <a href="{{ "products/".$product->productsID."/edit" }}" class="btn btn-circle btn-success"><i class="fas fa-pencil-alt"></i></a>
-                            <form action="{{ "products/".$product->productsID }}" method="post">
-                                <input type="hidden" name="_method" value="DELETE">
-                                @csrf
-                                <button type="submit" class="btn btn-circle btn-danger"><i class="fas fa-trash"></i></button>
-                            </form>
-=======
                         <a href="{{ "products/".$product->productsID."/edit" }}" class="btn btn-circle btn-success"><i class="fas fa-pencil-alt"></i></a>
                         <form action="{{ "products/".$product->productsID }}" method="post">   
                             <input type="hidden" name="_method" value="DELETE">
                             @csrf
                             <button type="submit" class="btn btn-circle btn-danger"><i class="fas fa-trash"></i></button>
                         </form>
->>>>>>> 6b036418b639707343bff45e89844148a0f158fc
                         </td>
                     </tr>        
                     @empty

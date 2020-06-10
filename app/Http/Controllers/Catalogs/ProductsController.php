@@ -9,6 +9,11 @@ use App\Models\Products;
 
 class ProductsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:see products|edit products']);
+    }
+
     public function index(){
 
         $products = Products::where('price','>', 30)->get();;
@@ -45,7 +50,7 @@ class ProductsController extends Controller
         return view('catalogs.products.edit')->with('product',$product);
     }
 
-    public function update($productID,Request $request)
+    public function update($productID,ProductsRequest $request)
     {
         $product = Products::where('productsID', '=' , $productID)->firstOrFail();
 
@@ -53,8 +58,6 @@ class ProductsController extends Controller
         $product->description = $request->post('description');
         $product->price = $request->post('price');
         $product->cost = $request->post('cost');
-        
-        $product = Products::where('productsID', '=', $product)->firstOrFail();  
 
         $product->save();
 

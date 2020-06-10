@@ -42,5 +42,17 @@ Route::middleware(['auth'])->group(function () {
         'clients' => 'Catalogs\ClientsController'
     ]);
     
+    Route::resources([
+        'roles' => 'Catalogs\RolesController'
+    ]);
+    
+    Route::resources([
+        'permissions' => 'Catalogs\PermissionsController'
+    ]);
+    
+    Route::resources([
+        'rolepermissions' => 'Catalogs\RolePermissionsController'
+    ]);
+    
 });
 
