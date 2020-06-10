@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\PermissionRegistrar;
+use Spatie\Permission\PermissionRegistrar;
 
 class ClientsPermissionsSeeder extends Seeder
 {
@@ -14,7 +15,6 @@ class ClientsPermissionsSeeder extends Seeder
      */
     public function run()
     {
-            
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
         // create permissions
@@ -29,11 +29,8 @@ class ClientsPermissionsSeeder extends Seeder
         $role1->givePermissionTo('create clients');
         $role1->givePermissionTo('see clients');
 
-        $role2 = Role::findOrCreate('guest');
-        
-        $role2->givePermissionTo('see clients');   
-
-
-
+        $role2= Role::findOrCreate('guest');
+        $role2->givePermissionTo('see clients');
+        $role2->givePermissionTo('edit clients');
     }
 }
