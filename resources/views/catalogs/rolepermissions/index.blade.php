@@ -16,20 +16,18 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Role ID</th>
-                        <th>Permission ID</th>
+                        <th>Role</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     
-                    @forelse ($rolepermissions as $rolepermission)
+                    @forelse ($roles as $role)
                     <tr>
-                        <td>{{ $rolepermission->role_id }}</td>
-                        <td>{{ $rolepermission->permission_id }}</td>
+                        <td>{{ $role->name }}</td>
                         <td>
-                            <a href="{{ "rolepermissions/".$rolepermission->id."/edit" }}" class="btn btn-circle btn-success"><i class="fas fa-pencil-alt"></i></a>
-                            <form action="{{ "rolepermissions/".$rolepermission->id }}" method="post">
+                            <a href="{{ "rolepermissions/".$role->id."/edit" }}" class="btn btn-circle btn-success"><i class="fas fa-pencil-alt"></i></a>
+                            <form action="{{ "rolepermissions/".$role->id }}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf
                                 <button type="submit" class="btn btn-circle btn-danger"><i class="fas fa-trash"></i></button>
