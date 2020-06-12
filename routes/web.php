@@ -53,6 +53,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resources([
         'rolepermissions' => 'Catalogs\RolePermissionsController'
     ]);
+
+    Route::resources([
+        'users' => 'Catalogs\UsersController'
+    ]);
     
 });
 

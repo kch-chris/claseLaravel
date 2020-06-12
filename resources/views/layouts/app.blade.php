@@ -297,7 +297,32 @@
                             </a>
                         </li>
                         @endcan
-                        
+                        @role('admin')
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                            aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
+                                class="hide-menu">Seguridad </span></a>
+                        <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                            <li class="sidebar-item">
+                                <a href="{{ route('users.index')}}" class="sidebar-link">
+                                    <span class="hide-menu"> Usuarios
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="{{ route('roles.index')}}" class="sidebar-link">
+                                    <span class="hide-menu"> Roles
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                            <a href="{{ route('rolepermissions.index') }}" class="sidebar-link">
+                                    <span class="hide-menu"> Permisos
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    @endrole
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
