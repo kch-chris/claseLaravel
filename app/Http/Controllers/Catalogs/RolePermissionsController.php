@@ -6,14 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\RolePermissionsRequest;
 use App\Models\RolePermissions;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use DB;
 
 class RolePermissionsController extends Controller
 {
-    public function index(){
-
-        $permissions = RolePermissions::get();
+    public function index()
+    {     
+        $roles = Role::get();
         
-        return view('catalogs.rolepermissions.index')->with('rolepermissions',$permissions);
+        return view('catalogs.rolepermissions.index')->with('roles',$roles);
 
     }
 
@@ -41,21 +44,34 @@ class RolePermissionsController extends Controller
         return redirect()->route('rolepermissions.index');
     }
 
-    public function edit($permission)
+    public function edit($id)
     {
-        $permissions = RolePermissions::where('id', '=' , $permission)->firstOrFail();
-        // dd($role);
-        return view('catalogs.rolepermissions.edit')->with('permission',$permissions);
+        $role = Role::find($id);
+        $permissions = DB::table('permissions')
+        ->select(
+            'permissions.name AS NombrePermiso',
+            'role_has_permissions.permission_id as idPermiso'
+            )
+        ->join('role_has_permissions', 'role_has_permissions.permission_id','=','permissions.id')
+        ->where('role_has_permissions.role_id','=',$id)
+        ->get();
+        
+        return view('catalogs.rolepermissions.edit')->with(['role'=>$role,'permissions'=>$permissions]);
     }
 
     public function update($id,Request $request)
     {
-        $permission = RolePermissions::where('id', '=' , $id)->firstOrFail();
+        // dd($request->post('permissions'));
 
-        $permission->name = $request->post('name');
-        $permission->guard_name = $request->post('guard_name');
+        $role = Role::find($id);
 
-        $permission->save();
+        $permissions = [];
+
+        if($request->has('permissions')){
+            $permissions = array_keys($request->post('permissions'));
+        }
+
+        $role->syncPermissions($permissions);
 
         return redirect()->route('rolepermissions.index');
 

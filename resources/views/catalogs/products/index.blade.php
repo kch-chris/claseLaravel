@@ -34,11 +34,7 @@
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->cost }}</td>
                         <td>
-<<<<<<< HEAD
-=======
-
                         @can('edit products')
->>>>>>> 1ec23a0576b22af7536651301fee05ca18a987f6
                         <a href="{{ "products/".$product->productsID."/edit" }}" class="btn btn-circle btn-success"><i class="fas fa-pencil-alt"></i></a>
                         @endcan
                         @can('delete products')
@@ -47,10 +43,7 @@
                             @csrf
                             <button type="submit" class="btn btn-circle btn-danger"><i class="fas fa-trash"></i></button>
                         </form>
-<<<<<<< HEAD
-=======
                         @endcan
->>>>>>> 1ec23a0576b22af7536651301fee05ca18a987f6
                         </td>
                     </tr>        
                     @empty

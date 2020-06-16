@@ -6,9 +6,9 @@
 
 
     <div>
-        <h2>Role Has Permissions</h2>
+        <h2>Users</h2>
         <div class="float-right">
-        <a href="{{ route('rolepermissions.create') }}" class="btn btn-circle btn-primary"><i class="fas fa-plus"></i></a>
+        <a href="{{ route('users.create') }}" class="btn btn-circle btn-primary"><i class="fas fa-plus"></i></a>
         </div>
     </div>
 
@@ -16,18 +16,20 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Role</th>
+                        <th >Name</th>
+                        <th >Email</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     
-                    @forelse ($roles as $role)
+                    @forelse ($users as $user)
                     <tr>
-                        <td>{{ $role->name }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
                         <td>
-                            <a href="{{ "rolepermissions/".$role->id."/edit" }}" class="btn btn-circle btn-success"><i class="fas fa-pencil-alt"></i></a>
-                            <form action="{{ "rolepermissions/".$role->id }}" method="post">
+                            <a href="{{ "users/".$user->id."/edit" }}" class="btn btn-circle btn-success"><i class="fas fa-pencil-alt"></i></a>
+                            <form action="{{ "users/".$user->id }}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf
                                 <button type="submit" class="btn btn-circle btn-danger"><i class="fas fa-trash"></i></button>
@@ -35,7 +37,7 @@
                         </td>
                     </tr>        
                     @empty
-                        <p>No Permissions</p>
+                        <p>No Users</p>
                     @endforelse
             
         </tbody>

@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Catalogs;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\RolesRequest;
-use App\Models\Roles;
+use Spatie\Permission\Models\Role;
 
 class RolesController extends Controller
 {
     public function index(){
 
-        $roles = Roles::where('id','>', 0)->get();;
+        $roles = Role::where('id','>', 0)->get();;
         
         return view('catalogs.roles.index')->with('roles',$roles);
 
@@ -26,7 +26,7 @@ class RolesController extends Controller
     {
         // dd($request->post('description'));
 
-        $newRole = new Roles();
+        $newRole = new Role();
 
         $newRole->name = $request->post('name');
         $newRole->guard_name = $request->post('guard_name');
@@ -38,14 +38,14 @@ class RolesController extends Controller
 
     public function edit($role)
     {
-        $roles = Roles::where('id', '=' , $role)->firstOrFail();
+        $roles = Role::where('id', '=' , $role)->firstOrFail();
         // dd($role);
         return view('catalogs.roles.edit')->with('role',$roles);
     }
 
     public function update($id,Request $request)
     {
-        $role = Roles::where('id', '=' , $id)->firstOrFail();
+        $role = Role::where('id', '=' , $id)->firstOrFail();
 
         $role->name = $request->post('name');
         $role->guard_name = $request->post('guard_name');
@@ -58,7 +58,7 @@ class RolesController extends Controller
 
     public function destroy($id)
     {
-        Roles::destroy($id);
+        Role::destroy($id);
 
         return redirect()->route('roles.index');
     }
