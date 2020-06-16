@@ -48,7 +48,5 @@
             echo '</div>';
         echo '</div>';
     echo Form::close();
-      if(isset($errors)) print_r($errors->first('name'));
     @endphp
-    
 @endsection()

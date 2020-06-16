@@ -30,8 +30,6 @@ class ProductsController extends Controller
 
     public function store(ProductsRequest $request)
     {
-        // dd($request->post('description'));
-
         $newProduct = new Products();
 
         $newProduct->name = $request->post('name');
@@ -42,6 +40,7 @@ class ProductsController extends Controller
         $newProduct->save();
 
         return redirect()->route('products.index');
+
     }
 
     public function edit($product)
@@ -51,7 +50,7 @@ class ProductsController extends Controller
         return view('catalogs.products.edit')->with('product',$product);
     }
 
-    public function update($productID,Request $request)
+    public function update($productID,ProductsRequest $request)
     {
         $product = Products::where('productsID', '=' , $productID)->firstOrFail();
 
@@ -59,7 +58,7 @@ class ProductsController extends Controller
         $product->description = $request->post('description');
         $product->price = $request->post('price');
         $product->cost = $request->post('cost');
-        
+
         $product->save();
 
         return redirect()->route('products.index');

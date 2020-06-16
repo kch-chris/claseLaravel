@@ -15,7 +15,6 @@
         </div>
         @endcan
     </div>
-
     <div class="col-12" class="table-responsive">
         <table class="table table-striped table-bordered no-wrap" id="productsTable" width="100%">
             <thead>
@@ -58,8 +57,7 @@
                 @endforelse
         
             </tbody>
-        </table>
-
+           
     </div>
 </div>
 @endsection

@@ -24,7 +24,6 @@ class ClientsPermissionsSeeder extends Seeder
         Permission::create(['name' => 'see clients']);
 
         $role1 = Role::findOrCreate('admin');
-
         $role1->givePermissionTo('edit clients');
         $role1->givePermissionTo('delete clients');
         $role1->givePermissionTo('create clients');
@@ -33,8 +32,5 @@ class ClientsPermissionsSeeder extends Seeder
         $role2= Role::findOrCreate('guest');
         $role2->givePermissionTo('see clients');
         $role2->givePermissionTo('edit clients');
-
-
-
     }
 }
