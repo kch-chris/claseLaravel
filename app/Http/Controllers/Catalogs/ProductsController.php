@@ -60,8 +60,6 @@ class ProductsController extends Controller
         $product->price = $request->post('price');
         $product->cost = $request->post('cost');
         
-        $product = Products::where('productsID', '=', $product)->firstOrFail();  
-
         $product->save();
 
         return redirect()->route('products.index');
