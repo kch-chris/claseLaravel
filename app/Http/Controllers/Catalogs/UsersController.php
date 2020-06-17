@@ -4,56 +4,63 @@ namespace App\Http\Controllers\Catalogs;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-//use App\Http\Requests\UsersRequest;
+use App\Http\Requests\UsersRequest;
 use App\User;
-
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash; 
 class UsersController extends Controller
 {
     public function index(){
 
-        $roles = User::where('id','>', 0)->get();;
+        $users = User::where('id','>', 0)->get();;
         
-        return view('catalogs.users.index')->with('users',$roles);
+        return view('catalogs.users.index')->with('users',$users);
 
     }
 
     public function create()
     {
-        $roles = Role::all();
 
-        return view('catalogs.users.create')->with('roles',$roles->toArray());
+        $roles=Role::select('name')->where('id','>',0)->get();
+
+        
+        return view('catalogs.users.create')
+                ->with('roles',$roles);
     }
 
-    public function store(Request $request)
+    public function store(UsersRequest $request)
     {
-        // dd($request->post('description'));
+        $newUser = new User();
 
-        $newRole = new User();
+        $newUser->name = $request->post('name');
+        $newUser->email = $request->post('email');
+        $newUser->password = Hash::make($request->post('password'));
 
-        $newRole->name = $request->post('name');
-        $newRole->guard_name = $request->post('guard_name');
+        $newUser->save();
 
-        $newRole->save();
-
+        $newUser->assignRole($request->post('role'));
         return redirect()->route('users.index');
     }
 
     public function edit($user)
     {
-        $users = User::where('id', '=' , $user)->firstOrFail();
-        // dd($role);
-        return view('catalogs.users.edit')->with('role',$users);
+        $user = User::where('id', '=' , $user)->firstOrFail();
+        $roles=Role::select('name')->where('id','>',0)->get();
+        
+        return view('catalogs.users.edit')->with(['user'=>$user,'roles'=>$roles]);
     }
 
-    public function update($id,Request $request)
+    public function update($id,UsersRequest $request)
     {
-        $role = User::where('id', '=' , $id)->firstOrFail();
+        $user = User::where('id', '=' , $id)->firstOrFail();
 
-        $role->name = $request->post('name');
-        $role->guard_name = $request->post('guard_name');
+        $user->name = $request->post('name');
+        $user->email = $request->post('email');
+        $user->password = Hash::make($request->post('password'));
 
-        $role->save();
+        $user->save();
+
+        $user->assignRole($request->post('role'));
 
         return redirect()->route('users.index');
 
@@ -61,7 +68,7 @@ class UsersController extends Controller
 
     public function destroy($id)
     {
-        Users::destroy($id);
+        user::destroy($id);
 
         return redirect()->route('users.index');
     }

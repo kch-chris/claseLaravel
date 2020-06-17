@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\RolePermissionsRequest;
 use App\Models\RolePermissions;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use App\Models\Roles;
 use DB;
 
 class RolePermissionsController extends Controller
 {
-    public function index()
-    {     
+    public function index(){
         $roles = Role::get();
         
         return view('catalogs.rolepermissions.index')->with('roles',$roles);
@@ -46,29 +46,21 @@ class RolePermissionsController extends Controller
 
     public function edit($id)
     {
-        $role = Role::find($id);
-        $permissions = DB::table('permissions')
-        ->select(
-            'permissions.name AS NombrePermiso',
-            'role_has_permissions.permission_id as idPermiso'
-            )
-        ->join('role_has_permissions', 'role_has_permissions.permission_id','=','permissions.id')
-        ->where('role_has_permissions.role_id','=',$id)
-        ->get();
+        $role = Roles::find($id);
         
-        return view('catalogs.rolepermissions.edit')->with(['role'=>$role,'permissions'=>$permissions]);
+        $permission =Roles::getPermissions($role->id);
+
+        return view('catalogs.rolepermissions.edit')->with(['role'=>$role, 'permissions'=>$permission]);
     }
 
     public function update($id,Request $request)
     {
-        // dd($request->post('permissions'));
-
+        
         $role = Role::find($id);
-
-        $permissions = [];
-
-        if($request->has('permissions')){
-            $permissions = array_keys($request->post('permissions'));
+        $permissions=[];
+        if($request->has('permissions'))
+        { 
+            $permissions=array_keys($request->post('permissions'));
         }
 
         $role->syncPermissions($permissions);

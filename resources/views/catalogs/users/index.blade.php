@@ -6,7 +6,7 @@
 
 
     <div>
-        <h2>Users</h2>
+        <h2>Roles</h2>
         <div class="float-right">
         <a href="{{ route('users.create') }}" class="btn btn-circle btn-primary"><i class="fas fa-plus"></i></a>
         </div>
@@ -16,7 +16,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th >Name</th>
+                        <th >Nombre</th>
                         <th >Email</th>
                         <th></th>
                     </tr>
@@ -28,12 +28,17 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            <a href="{{ "users/".$user->id."/edit" }}" class="btn btn-circle btn-success"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{ "users/".$user->id."/edit" }}" class="btn btn-circle btn-success">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
                             <form action="{{ "users/".$user->id }}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf
                                 <button type="submit" class="btn btn-circle btn-danger"><i class="fas fa-trash"></i></button>
                             </form>
+                            <a href="{{ route('rolepermissions.index') }}" class="btn btn-circle btn-info">
+                                <i class="far fa-user"></i>
+                            </a>
                         </td>
                     </tr>        
                     @empty
