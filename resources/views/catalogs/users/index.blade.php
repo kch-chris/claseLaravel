@@ -31,6 +31,9 @@
                             <a href="{{ "users/".$user->id."/edit" }}" class="btn btn-circle btn-success">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
+                            <a href="{{ "users/".$user->id."/editPermissions" }}" class="btn btn-circle btn-primary">
+                                <i class="fas fa-lock"></i>
+                            </a>
                             <form action="{{ "users/".$user->id }}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 @csrf

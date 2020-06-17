@@ -1,3 +1,5 @@
+@extends('layouts.app')
+
 @section('css')
 <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 {{-- <link href="{{ asset('assets/libs/datatables/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"> --}}
@@ -42,7 +44,7 @@
                     </a>
                     @endcan
                     @can('delete products')
-                <form action="{{ "products/".$product->productsID }}" method="post" id="delete{{ $product->productsID }}">   
+                    <form action="{{ "products/".$product->productsID }}" method="post" id="delete{{ $product->productsID }}">   
                         <input type="hidden" name="_method" value="DELETE">
                         @csrf
                         <button type="submit" onclick="checkDelete(event,'delete{{ $product->productsID }}')" class="btn btn-circle btn-danger">

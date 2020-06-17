@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UsersRequest;
 use App\User;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Hash; 
 class UsersController extends Controller
 {
@@ -72,5 +73,21 @@ class UsersController extends Controller
         user::destroy($id);
 
         return redirect()->route('users.index');
+    }
+
+
+    public function editPermissions($userId){
+
+        $permissions = Permission::all();
+
+        $user = User::findorFail($userId);
+
+        $usPermission= $user->getAllPermissions();
+        //dd($usPermission);
+        return view('catalogs.users.permissions')->with([
+            'permissions'=>$permissions,
+            'user'=>$user,
+            'usPermission'=>$usPermission
+            ]);
     }
 }

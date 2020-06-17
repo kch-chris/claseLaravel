@@ -20,5 +20,6 @@ class Roles extends Role
 
         return $permission;
 
-    } 
+    }
+    
 }
