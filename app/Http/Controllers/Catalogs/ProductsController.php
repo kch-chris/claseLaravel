@@ -12,7 +12,7 @@ class ProductsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['permission:see products|edit products']);
+        // $this->middleware(['permission:see products|edit products']);
     }
 
     public function index(){
@@ -30,8 +30,6 @@ class ProductsController extends Controller
 
     public function store(ProductsRequest $request)
     {
-        // dd($request->post('description'));
-
         $newProduct = new Products();
 
         $newProduct->name = $request->post('name');
@@ -42,6 +40,7 @@ class ProductsController extends Controller
         $newProduct->save();
 
         return redirect()->route('products.index');
+
     }
 
     public function edit($product)
