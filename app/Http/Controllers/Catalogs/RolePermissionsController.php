@@ -46,16 +46,19 @@ class RolePermissionsController extends Controller
 
     public function edit($id)
     {
-        $role = Roles::find($id);
+        $role = Roles::find($id);    
         
-        $permission =Roles::getPermissions($role->id);
 
-        return view('catalogs.rolepermissions.edit')->with(['role'=>$role, 'permissions'=>$permission]);
+        $permissions = Permission::all();
+        $rolePermission =Roles::getPermissions($role->id);
+        // dd($rolePermission);
+
+        return view('catalogs.rolepermissions.edit')->with(['role'=>$role, 'rolePermissions'=>$rolePermission, 'permissions'=>$permissions]);
     }
 
     public function update($id,Request $request)
     {
-        
+
         $role = Role::find($id);
         $permissions=[];
         if($request->has('permissions'))
