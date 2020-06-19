@@ -61,8 +61,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users/{userId}/editPermissions','Catalogs\UsersController@editPermissions')->name('user.permission.edit');
     
     Route::resources([
-        'users' => 'Catalogs\UsersController'
+        'inventoryEntry' => 'InventoryEntryController'
     ]);
+
+    
     
 });
 
