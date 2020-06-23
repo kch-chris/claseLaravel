@@ -117,6 +117,8 @@ class InventoryEntryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        InventoryEntry::find(1)->delete();
+
+        return redirect()->route('entry.index');
     }
 }

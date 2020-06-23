@@ -89,4 +89,18 @@ class UsersController extends Controller
             'usPermission'=>$usPermission
             ]);
     }
+
+    public function savePermissions($userId, Request $request){
+        $user = User::findorFail($userId);
+
+        $permissions=[];
+        if($request->has('permissions'))
+        { 
+            $permissions=array_keys($request->post('permissions'));
+        }
+
+        $user->syncPermissions($permissions);
+
+        return redirect()->route('users.index');
+    }
 }

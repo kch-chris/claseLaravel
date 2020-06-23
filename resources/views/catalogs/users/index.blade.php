@@ -39,9 +39,6 @@
                                 @csrf
                                 <button type="submit" class="btn btn-circle btn-danger"><i class="fas fa-trash"></i></button>
                             </form>
-                            <a href="{{ route('rolepermissions.index') }}" class="btn btn-circle btn-info">
-                                <i class="far fa-user"></i>
-                            </a>
                         </td>
                     </tr>        
                     @empty

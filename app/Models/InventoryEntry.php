@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Models;
+use SoftDeletes;
 
 use Illuminate\Database\Eloquent\Model;
 
 class InventoryEntry extends Model
 {
     protected $table="inventory_entry";
+    protected $dates = ['deleted_at'];
     protected $primaryKey = 'inventory_entryID';
 
     protected $fillable = [

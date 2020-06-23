@@ -6,7 +6,7 @@
     </div>
 
     @php
-        echo Form::open(['url' => 'users/'.$user->id , 'method' => 'put']);
+        echo Form::open(['url' => 'users/'.$user->id.'/updatePermissions', 'method' => 'put']);
             echo Form::label('name', 'Name', ['class' => 'awesome']);
             echo Form::text('name', $user->name, array_merge(['class' => 'form-control','readonly'=> true]));
     @endphp
