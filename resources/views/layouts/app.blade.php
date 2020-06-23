@@ -297,6 +297,7 @@
                             </a>
                         </li>
                         @endcan
+                        
                         @role('admin')
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
                             aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
@@ -323,6 +324,18 @@
                         </ul>
                     </li>
                     @endrole
+                    <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                        aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
+                            class="hide-menu">Inventarios </span></a>
+                        <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                            <li class="sidebar-item">
+                                <a href="{{ route('inventoryEntry.index')}}" class="sidebar-link">
+                                    <span class="hide-menu"> Entradas
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

@@ -14,11 +14,11 @@ class Roles extends Role
             'permissions.name as NombrePermiso',
             'role_has_permissions.permission_id as idPermiso'
         )
-        ->join('role_has_permissions', 'role_has_permissions.permission_id','=','permissions.id')
+        ->leftJoin('role_has_permissions', 'role_has_permissions.permission_id','=','permissions.id')
         ->where('role_has_permissions.role_id','=',$roleId)
         ->get();
 
         return $permission;
 
-    } 
+    }
 }

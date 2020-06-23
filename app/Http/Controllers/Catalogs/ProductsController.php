@@ -12,16 +12,27 @@ class ProductsController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware(['permission:see products|edit products']);
+        $this->middleware('permission:see products')->only(['index']);
+        $this->middleware('permission:edit products')->only(['edit','update']);
+        $this->middleware('permission:delete products')->only(['destroy']);
+        $this->middleware('permission:create products')->only(['create','store']);
     }
 
     public function index(){
 
-        $products = Products::where('price','>', 30)->get();;
+        $products = Products::all();;
         
         return view('catalogs.products.index')->with('products',$products);
 
     }
+
+    public function show($product)
+    {
+        $product = Products::where('productsID', '=' , $product)->firstOrFail();
+        
+        return view('catalogs.products.show')->with('product',$product);
+    }
+
 
     public function create()
     {

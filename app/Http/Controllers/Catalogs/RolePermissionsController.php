@@ -6,9 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\RolePermissionsRequest;
 use App\Models\RolePermissions;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use DB;
+use Spatie\Permission\Models\Role;
 use App\Models\Roles;
 
 class RolePermissionsController extends Controller
@@ -46,16 +45,18 @@ class RolePermissionsController extends Controller
 
     public function edit($id)
     {
-        $role = Roles::find($id);
+        $role = Roles::find($id);    
         
-        $permission =Roles::getPermissions($role->id);
 
-        return view('catalogs.rolepermissions.edit')->with(['role'=>$role, 'permissions'=>$permission]);
+        $permissions = Permission::all();
+        $rolePermission =Roles::getPermissions($role->id);
+        // dd($rolePermission);
+
+        return view('catalogs.rolepermissions.edit')->with(['role'=>$role, 'rolePermissions'=>$rolePermission, 'permissions'=>$permissions]);
     }
 
     public function update($id,Request $request)
     {
-        
         $role = Role::find($id);
         $permissions=[];
         if($request->has('permissions'))

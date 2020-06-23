@@ -1,16 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-12">
-        Edita un Producto
-    </div>
     @php
     echo Form::open(['url' => 'products/'.$product->productsID ,'method' => 'put']);
         echo '<div class="row">';
             echo '<div class="col-10">';
                 echo '<div class="card">';
                    echo '<div class="card-body">';
-                    echo '<h4 class="card-title">Create Product</h4>';
+                    echo '<h4 class="card-title">Edit Product</h4>';
                     echo '<div class="row">';
                             echo '<div class="col-6">';
                             echo Form::label('Name', null, ['class' => 'control-label']);
