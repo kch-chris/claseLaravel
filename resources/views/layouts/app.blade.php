@@ -376,6 +376,7 @@
     <script src="{{ asset('assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js') }}"></script>
     <script src="{{ asset('assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script src="{{ asset('assets/adminmart/js/pages/dashboards/dashboard1.min.js') }} "></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     @yield('js')
 </body>
 </html>

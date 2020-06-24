@@ -41,16 +41,24 @@ class ProductsController extends Controller
 
     public function store(ProductsRequest $request)
     {
-        $newProduct = new Products();
+        try {
+            $newProduct = new Products();
 
-        $newProduct->name = $request->post('name');
-        $newProduct->description = $request->post('description');
-        $newProduct->price = $request->post('price');
-        $newProduct->cost = $request->post('cost');
+            $newProduct->name = $request->post('name');
+            $newProduct->description = $request->post('description');
+            $newProduct->price = $request->post('price');
+            $newProduct->cost = $request->post('cost');
+    
+            $newProduct->save();
+    
+            return response()->json(['status'=> true,'message'=>'Usuario Creado']);
 
-        $newProduct->save();
+        } catch (\Throwable $th) {
+            
+            return response()->json(['status'=> false,'message'=>$th->getMessage()]);
+        }
 
-        return redirect()->route('products.index');
+        
 
     }
 

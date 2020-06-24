@@ -74,7 +74,7 @@ function saveEntry(e)
     //let totalPieces = detEntry.reduce((a,b) => parseInt(a) + parseInt(b.quantity) ,0 );
     let data = { description: description,  details : detEntry };
     $.ajax({
-
+        
         type:'POST',
 
         url:'/inventoryEntry',
