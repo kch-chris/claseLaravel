@@ -59,13 +59,14 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
     Route::get('/users/{userId}/editPermissions','Catalogs\UsersController@editPermissions')->name('user.permission.edit');
-    
 
     Route::put('/users/{userId}/updatePermissions','Catalogs\UsersController@savePermissions')->name('user.permission.update');
-    
+
     Route::resources([
         'inventoryEntry' => 'InventoryEntryController'
     ]);
+
+    Route::get('inventoryEntry/{id}', 'InventoryEntryController@show');
 
     
     

@@ -17,5 +17,9 @@ class InventoryEntryDet extends Model
         return $this->belongsTo('App\Models\InventoryEntry','inventory_entryID');
     }
 
+    public function productos(){
+        return $this->hasOne('App\Models\Products','productsID','productsID');
+    }
+
     public $timestamps= false;
 }

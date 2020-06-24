@@ -6,38 +6,22 @@
     <div class="col-12">
         <div class="card">
            <div class="card-body">
-            <h4 class="card-title">Entrada de Inventario</h4>
-            <div class="row">
-                <div class="col-10">
-                    <label for="description"> Descripción</label>
-                    <input type="text" value="{{ $entry->description }}" name="description" id="description" class="form-control" readonly/>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <table class="table table-striped" id="detEntry">
-                    <thead>
+                <h2>
+                   {{$entry[0]->description}}
+                </h2>
+                <table class="table table-striped table-bordered no-wrap">
+                    <tr>
                         <th>Producto</th>
                         <th>Cantidad</th>
-                    </thead>
-                    <tbody>
-                        @foreach($details as $detail)
+                    </tr>
+                    @foreach ($products as $product)
                         <tr>
-                            <td>{{ $detail->products->name }}</td>
-                            <td>{{ $detail->quantity }}</td>
+                            <td>{{ $product->productos->name }}</td>
+                            <td>{{ $product->quantity }}</td>
                         </tr>
-                        @endforeach
-                    </tbody>
+                    @endforeach
                 </table>
-            </div>
-            <br>
-            <br>
-            <div class='form-actions'>
-                <div class="text-right">
-                    <a class="btn btn-secondary" href="{{ route('inventoryEntry.index') }}">Regresar</a>
-                    
-                </div>
-            </div>
+           </div>
         </div>
     </div>
 </div>

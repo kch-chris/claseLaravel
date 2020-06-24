@@ -35,20 +35,20 @@
                 <tr>
                     <td>{{ $entry->description }}</td>
                     <td>{{ $entry->created_at }}</td>
-                    <td>{{ $entry->estatus }}</td>
+                    <td>{{ $entry->deleted_at }}</td>
                     <td>
 
                     {{-- @can('edit products') --}}
-                    <a href="{{ "inventoryEntry/".$entry->inventoryEntryID."" }}" class="btn btn-circle btn-primary">
+                    <a href="{{ "inventoryEntry/".$entry->inventory_entryID."" }}" class="btn btn-circle btn-primary">
                         <i class="fas fa-search"></i>
                     </a>
                     {{-- @endcan
                     @can('delete products') --}}
                     @if($entry->_get('estatus')==1)
-                    <form action="{{ "inventoryEntry/".$entry->inventoryEntryID }}" method="post" id="delete{{ $entry->inventoryEntryID }}">   
+                    <form action="{{ "inventoryEntry/".$entry->inventory_entryID }}" method="post" id="delete{{ $entry->inventory_entryID }}">   
                             <input type="hidden" name="_method" value="DELETE">
                             @csrf
-                            <button type="submit" onclick="checkDelete(event,'delete{{ $entry->inventoryEntryID }}')" class="btn btn-circle btn-danger">
+                            <button type="submit" onclick="checkDelete(event,'delete{{ $entry->inventory_entryID }}')" class="btn btn-circle btn-danger">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>

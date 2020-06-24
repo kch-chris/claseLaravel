@@ -25,9 +25,7 @@ class CreateTableInventoryEntry extends Migration
             $table->increments('inventory_entry_detID');
             $table->integer('inventory_entryID')->unsigned();
             $table->integer('productsID')->unsigned();
-            $table->softDeletes();
             $table->integer('quantity');
-            $table->foreign('inventory_entryID')->references('inventory_entryID')->on('inventory_entry')->onDelete('cascade');
         });
 
         Schema::table('inventory_entry_det', function (Blueprint $table) {

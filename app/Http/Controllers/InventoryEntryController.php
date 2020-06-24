@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\InventoryEntry;
 use App\Models\InventoryEntryDet;
 use App\Models\Products;
+use DB;
 
 class InventoryEntryController extends Controller
 {
@@ -16,7 +17,7 @@ class InventoryEntryController extends Controller
      */
     public function index()
     {
-        $entries = InventoryEntry::where('estatus','=',1)->with('details')->get();
+        $entries = InventoryEntry::withTrashed()->where('estatus','=',1)->with('details')->get();
         //dd($entries[0]->details);
 
         return view('inventory.entry.index')->with('entries',$entries);
@@ -83,7 +84,10 @@ class InventoryEntryController extends Controller
      */
     public function show($id)
     {
-        //
+        $entries = InventoryEntry::where('inventory_entryID','=',$id)->get();
+        $detail = InventoryEntryDet::where('inventory_entryID','=',$id)->with('productos')->get();
+        // dd($detail);
+        return view('inventory.entry.show')->with(['entry' => $entries, 'products' => $detail]);
     }
 
     /**
@@ -117,8 +121,8 @@ class InventoryEntryController extends Controller
      */
     public function destroy($id)
     {
-        InventoryEntry::find(1)->delete();
+        InventoryEntry::destroy($id);
 
-        return redirect()->route('entry.index');
+        return redirect()->route('inventoryEntry.index');
     }
 }
