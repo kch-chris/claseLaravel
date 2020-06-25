@@ -15,6 +15,8 @@ class ClientsPermissionsSeeder extends Seeder
      */
     public function run()
     {
+        factory(\App\Models\Clients::class)->times(20)->create();
+
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
         // create permissions
