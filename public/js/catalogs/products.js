@@ -98,7 +98,7 @@ function updateProduct(e)
     console.log(data);
     $.ajax({
         
-        type:'PUT',
+        type:'POST',
 
         url:'/products/'+ID,
 

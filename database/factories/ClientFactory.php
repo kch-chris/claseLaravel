@@ -14,12 +14,12 @@ $factory->define(App\Models\Clients::class, function (Faker $faker) {
 
         'email' => $faker->unique()->safeEmail,
 
-        'phone' => $faker->phoneNumber,
+        'phone' => $faker->randomNumber($nbDigits = 8, $strict = false),
 
-        'age' => $faker->randomNumber($nbDigits = NULL, $strict = false),
+        'age' => $faker->randomNumber($nbDigits = 2, $strict = false),
 
-        'sex' => $faker->sentence(1),
+        'sex' => 'M',
 
-        'price' =>$faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 5000)
+        'credit' =>$faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 5000)
     ];
 });
