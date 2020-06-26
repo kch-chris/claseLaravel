@@ -51,7 +51,7 @@ class ProductsController extends Controller
     
             $newProduct->save();
     
-            return response()->json(['status'=> true,'message'=>'Usuario Creado']);
+            return response()->json(['status'=> true,'message'=>'Productoo Creado']);
 
         } catch (\Throwable $th) {
             
@@ -70,17 +70,23 @@ class ProductsController extends Controller
     }
 
     public function update($productID,ProductsRequest $request)
-    {
-        $product = Products::where('productsID', '=' , $productID)->firstOrFail();
+    {   
+        try {
+            $product = Products::where('productsID', '=' , $productID)->firstOrFail();
 
-        $product->name = $request->post('name');
-        $product->description = $request->post('description');
-        $product->price = $request->post('price');
-        $product->cost = $request->post('cost');
+            $product->name = $request->post('name');
+            $product->description = $request->post('description');
+            $product->price = $request->post('price');
+            $product->cost = $request->post('cost');
 
-        $product->save();
+            $product->save();
+    
+            return response()->json(['status'=> true,'message'=>'Producto Actualizado']);
 
-        return redirect()->route('products.index');
+        } catch (\Throwable $th) {
+            
+            return response()->json(['status'=> false,'message'=>$th->getMessage()]);
+        }
 
     }
 
