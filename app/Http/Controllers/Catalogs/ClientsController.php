@@ -20,7 +20,13 @@ class ClientsController extends Controller
 
     public function create()
     {
-        return view('catalogs.clients.create');
+        $method="post";
+        $url="/clients";
+
+        return view('catalogs.clients.form')->with([
+            'method'=>$method ,
+            'url' => $url
+        ]);
     }
 
     public function store(ClientsRequest $request)
@@ -44,9 +50,16 @@ class ClientsController extends Controller
 
     public function edit($client)
     {
+        $method="put";
+        $url="/clients/".$client;
+
         $client = Clients::where('clientsID', '=' , $client)->firstOrFail();
         // dd($client);
-        return view('catalogs.clients.edit')->with('client',$client);
+        return view('catalogs.clients.form')->with([
+            'client'=>$client,
+            'method'=>$method ,
+            'url' => $url
+            ]);
     }
 
     public function update($clientID,ClientsRequest $request)

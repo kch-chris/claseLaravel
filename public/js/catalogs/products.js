@@ -69,7 +69,20 @@ function saveProduct(e)
 
         },
         error: function(res){
-            console.log(res);
+             let errors= res.responseJSON.errors;
+             
+             errors = Object.values(errors);
+            
+            let errors2 =errors.reduce(function(e1, e2){
+                return e1 + '<br>'+ e2;
+            });
+
+            Swal.fire({
+                title: 'Usuario',
+                html: errors2,
+                icon: 'error',
+                showConfirmButton: true
+            });
         }
 
      });
